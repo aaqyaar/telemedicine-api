@@ -2,9 +2,9 @@ package providers
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/aaqyaar/telemedicine/models"
+	"github.com/aaqyaar/telemedicine/utils"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -18,12 +18,12 @@ var DB *gorm.DB
  */
 func Connect() {
 
-	dsn := os.Getenv("DATABASE_URL")
+	dsn := utils.GetEnv("DATABASE_URL")
 
 	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
-		panic("failed to connect database")
+		panic("Failed to connect database")
 	}
 
 	fmt.Println("Database Connected")
