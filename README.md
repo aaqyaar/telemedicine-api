@@ -4,7 +4,7 @@ This is the API for the Telemedicine App. It is built using the Go programming l
 
 ## Getting Started
 
-To get started,
+To get started, follow the instructions below.
 
 1. Clone the repository
 
@@ -12,8 +12,14 @@ To get started,
 git clone https://github.com/aaqyaar/telemedicine-api
 ```
 
-2. Install the dependencies using `go get .`
-3. Run `go run .` to start the server
+2. Copy the `.env.example` file to `.env` and fill in the required values
+
+```bash
+cp .env.example .env
+```
+
+3. Install the dependencies using `go get .`
+4. Run `go run .` to start the server
 
 ### Prerequisites
 
