@@ -1,21 +1,35 @@
 package routes
 
 import (
+	"fmt"
+
 	"github.com/aaqyaar/telemedicine/controller"
 	"github.com/aaqyaar/telemedicine/middleware"
 	"github.com/gofiber/fiber/v2"
 )
+
+type SetupOptions struct {
+	Version int
+	App     *fiber.App
+}
 
 /**
  * @title       : routes.go
  * @description : initialize routes for the application
  * @package     : routes
  */
-func Setup(app *fiber.App) {
+func Setup(opts SetupOptions) {
+	app := opts.App
 
 	app.Use(middleware.Authenticate)
 
-	app.Get("/", controller.GetUsers)
-	app.Get("/:id", controller.GetUser)
+	version := fmt.Sprintf("/v%d", opts.Version)
+
+	v1 := app.Group(version, func(c *fiber.Ctx) error {
+		c.Set("X-VERSION", version)
+		return c.Next()
+	})
+
+	v1.Get("/", controller.GetUsers)
 
 }

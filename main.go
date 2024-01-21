@@ -24,7 +24,7 @@ func main() {
 	app := fiber.New()
 
 	// setup routes
-	routes.Setup(app)
+	routes.Setup(routes.SetupOptions{Version: 1, App: app})
 
 	app.Listen(":3000")
 }
