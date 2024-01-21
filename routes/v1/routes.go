@@ -21,6 +21,10 @@ type SetupOptions struct {
 func Setup(opts SetupOptions) {
 	app := opts.App
 
+	if opts.App == nil {
+		panic("Fiber app is missing")
+	}
+
 	app.Use(middleware.Authenticate)
 
 	version := fmt.Sprintf("/v%d", opts.Version)
