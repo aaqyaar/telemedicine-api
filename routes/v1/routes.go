@@ -34,6 +34,7 @@ func Setup(opts SetupOptions) {
 		return c.Next()
 	})
 
-	v1.Get("/", controller.GetUsers)
+	v1.Get("/users", controller.GetUsers)
+	v1.Post("/users", controller.CreateUser)
 
 }

@@ -5,12 +5,20 @@ import (
 	"gorm.io/gorm"
 )
 
+type UserCreation struct {
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `gorm:"unique" json:"email"`
+	Password  string `json:"password"`
+	Role      string `json:"role"`
+}
+
 type User struct {
 	gorm.Model
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
 	Email     string `gorm:"unique" json:"email"`
-	Password  string `json:"password"`
+	Password  string `json:"-"`
 	Role      string `json:"role"`
 }
 
