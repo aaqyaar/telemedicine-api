@@ -20,7 +20,9 @@ func Connect() {
 
 	dsn := utils.GetEnv("DATABASE_URL")
 
-	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	var err error
+
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		panic("Failed to connect database")
@@ -32,10 +34,8 @@ func Connect() {
 	AutoMigrate(DB)
 }
 
-func AutoMigrate(DB *gorm.DB) {
-	DB.AutoMigrate(&models.User{})
-}
-
-func GetDB() *gorm.DB {
-	return DB
+func AutoMigrate(connection *gorm.DB) {
+	connection.Debug().AutoMigrate(
+		&models.User{},
+	)
 }
